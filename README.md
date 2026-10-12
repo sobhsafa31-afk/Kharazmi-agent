@@ -1,8 +1,10 @@
 # Kharazmi Agent
 
+**Current version: `v0.1`** · [View releases](https://github.com/sobhsafa31-afk/Kharazmi-agent/releases)
+
 Kharazmi Agent is a Python-based desktop assistant for Windows. It connects a language model to a set of local tools, allowing users to interact with selected file-system and system-information tasks through natural language.
 
-> **Project status:** This project is under development. Review the code and test it in a safe environment before relying on it.
+> **Version status:** `v0.1` is the project's current version. The project team reports that all tests performed for this version passed. This statement reflects the team's report; it is not an independent audit.
 
 ## Features
 
@@ -87,7 +89,7 @@ Always check the current source code to confirm which provider, model, endpoint,
 
 Kharazmi Agent can perform local actions, including creating and deleting files, depending on the enabled tools. Review requested paths and actions carefully before allowing the agent to execute them. Test with non-important files first, and avoid running the application with elevated privileges unless necessary.
 
-The project is under active development and may need additional error handling, input validation, dependency management, and security improvements. AI-generated actions can be incorrect, so review important operations before execution.
+This release reflects the project's `v0.1` codebase. AI-generated actions can be incorrect, so review important operations before execution. Future changes should be documented in subsequent releases.
 
 ## Project Structure
 
@@ -103,6 +105,10 @@ The main application entry point and any additional files may vary as developmen
 ## Contributing and Feedback
 
 Suggestions, bug reports, and improvements are welcome. When reporting an issue, include the relevant error message and steps to reproduce it, but **never include API tokens, passwords, or other secrets**.
+
+## Versioning
+
+This project uses version tags and GitHub Releases to identify stable snapshots of the codebase. The current version is `v0.1`. Future releases should include a version tag, a summary of changes, and relevant setup notes.
 
 ## License
 
