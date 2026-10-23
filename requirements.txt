@@ -1,0 +1,4 @@
+requests
+psutil
+pyttsx3
+customtkinter
