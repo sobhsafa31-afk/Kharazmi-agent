@@ -1,115 +1,103 @@
 # Kharazmi Agent
 
-**Current version: `v0.1`** · [View releases](https://github.com/sobhsafa31-afk/Kharazmi-agent/releases)
+**A Python desktop assistant for Windows, powered by an LLM.**
 
-Kharazmi Agent is a Python-based desktop assistant for Windows. It connects a language model to a set of local tools, allowing users to interact with selected file-system and system-information tasks through natural language.
+Kharazmi Agent connects a language model to local tools so you can ask for supported file-system and system-information tasks in natural language. The **v0.2 release** introduces the project's web-search capability.
 
-> **Version status:** `v0.1` is the project's current version. The project team reports that all tests performed for this version passed. This statement reflects the team's report; it is not an independent audit.
+- **Latest release:** [Kharazmi Agent v0.2](https://github.com/sobhsafa31-afk/Kharazmi-agent/releases/tag/v0.2)
+- **All releases:** [GitHub Releases](https://github.com/sobhsafa31-afk/Kharazmi-agent/releases)
+- **Repository:** [sobhsafa31-afk/Kharazmi-agent](https://github.com/sobhsafa31-afk/Kharazmi-agent)
 
 ## Features
 
-Depending on the tools enabled in the current source code, Kharazmi Agent can:
+Depending on the selected release and its configuration, Kharazmi Agent supports:
 
-- List files in a directory.
-- Create folders and text files.
-- Read text files and search for files.
-- Open folders and supported applications.
-- Report basic RAM and disk-usage information.
-- Store recent conversation messages and simple long-term memory in SQLite.
-- Use text-to-speech functionality where configured.
+- Conversational responses from a configured language model.
+- Listing files and searching for files in a chosen directory.
+- Creating folders and text files, and reading or deleting files.
+- Opening supported folders and applications.
+- Reporting RAM and disk-usage information.
+- Storing recent conversation messages in a local SQLite database.
+- Text-to-speech output where supported by the current version.
+- Web search in the v0.2 release.
 
-Available actions are determined by the tools implemented in the project. Not every feature is necessarily enabled in every version.
+The exact actions available are determined by the files included in the release you run.
 
 ## Requirements
 
-- Windows is recommended because some functions use Windows-specific behavior such as `os.startfile`.
+- Windows is recommended; some operations use Windows-specific features.
 - Python 3.10 or later is recommended.
-- An internet connection for requests to the configured AI service.
-- An API token from the AI provider used by the project.
-- The account or project identifier required by that provider, if applicable.
+- An internet connection for the configured AI service and web-search functionality.
+- An account and API credentials for the AI provider configured in the source.
+- The Python packages listed in [requirements.txt](requirements.txt).
 
-Python packages used by the current tools include:
-
-- `requests`
-- `psutil`
-- `pyttsx3`
-
-Install the packages with:
+Install the dependencies from the repository folder:
 
 ```powershell
-python -m pip install requests psutil pyttsx3
+python -m pip install -r requirements.txt
 ```
 
-## API Token Setup
+## Download and run
 
-**An API token is required to run the AI-powered parts of this project.** An API token is a private credential that allows the application to authenticate with an AI service. Depending on the provider, API usage may have limits or incur costs.
-
-### Which provider should you use?
-
-The developer recommends obtaining your token from the **same AI provider that the project is configured to use**. This helps ensure that the token, account details, endpoint, and model are compatible. Using a token from an unrelated provider will not work unless the code is changed to support that provider.
-
-If you are using the Cloudflare Workers AI configuration in the source code, create or access your Cloudflare account and obtain the required API credentials from Cloudflare's official dashboard. You may need both an account ID and an API token, depending on the configuration.
-
-- Cloudflare dashboard: https://dash.cloudflare.com/
-- Cloudflare Workers AI documentation: https://developers.cloudflare.com/workers-ai/
-
-Always check the current source code to confirm which provider, model, endpoint, and credentials it expects.
-
-### Configure your credentials
-
-1. Identify the AI provider and the credential configuration used by the current version of the source code.
-2. Create an API token with only the permissions required by the project.
-3. Add your credentials locally using the configuration method expected by the code.
-4. Keep real credentials private. **Never publish your token in this repository, README, screenshots, issues, or commit history.**
-5. If a token has been exposed, revoke it and create a replacement immediately.
-
-> **Security note:** If the current source code contains a token directly in a Python file, do not commit or push that file with a real token. Prefer environment variables or a local, untracked configuration file. Environment variables will only work automatically if the application code is written to read them.
-
-## Installation and Running
-
-1. Install Python and make sure `python` is available in PowerShell.
-2. Download or clone this repository:
-
-   ```powershell
-   git clone https://github.com/sobhsafa31-afk/Kharazmi-agent.git
-   cd Kharazmi-agent
-   ```
-
-3. Install the Python packages listed in the Requirements section.
-4. Configure the required AI credentials as described above.
-5. Locate the project's main Python entry-point file and run it. For example, if the entry point is named `main.py`:
+1. Open the [v0.2 release page](https://github.com/sobhsafa31-afk/Kharazmi-agent/releases/tag/v0.2).
+2. Download the files provided under **Assets**. Keep the files together in one folder, including the system prompt and database file when they are included in the release.
+3. Install Python and the required packages as described above.
+4. Open the configuration section in the relevant Python entry-point file and provide your own AI-provider account ID and API token if the version requires them.
+5. From PowerShell, change to the folder containing the project files and run the entry-point file included in that release. For example:
 
    ```powershell
    python main.py
    ```
 
-   Use the actual entry-point filename if it differs.
+   If the downloaded version uses a different entry-point filename, run that file instead.
 
-## Safety and Limitations
+> **Important:** The repository's default branch and the files attached to a GitHub Release may not always be identical. For v0.2, use the files attached to the [v0.2 release](https://github.com/sobhsafa31-afk/Kharazmi-agent/releases/tag/v0.2) and follow the instructions for those files.
 
-Kharazmi Agent can perform local actions, including creating and deleting files, depending on the enabled tools. Review requested paths and actions carefully before allowing the agent to execute them. Test with non-important files first, and avoid running the application with elevated privileges unless necessary.
+## AI provider configuration
 
-This release reflects the project's `v0.1` codebase. AI-generated actions can be incorrect, so review important operations before execution. Future changes should be documented in subsequent releases.
+The current source has been configured for Cloudflare Workers AI with the `@cf/meta/llama-3.1-8b-instruct` model. Confirm the endpoint, model, and required credentials in the exact release files you download, as these can change between versions.
 
-## Project Structure
+- [Cloudflare Dashboard](https://dash.cloudflare.com/)
+- [Cloudflare Workers AI documentation](https://developers.cloudflare.com/workers-ai/)
 
-The repository currently includes these files:
+Never publish a real API token, account secret, password, or other credential in the repository, README, screenshots, issues, or commit history. Keep credentials private and use only the permissions required by the application. If a credential is exposed, revoke it and replace it.
 
-- `Function.py` — local tool functions for file operations, application launching, and basic system information.
-- `data_base.py` — SQLite-based storage for recent messages and long-term memory.
-- `system_prompet.txt` — system instructions that guide the model's structured action responses.
-- `README.md` — project overview and setup instructions.
+## Local data and safety
 
-The main application entry point and any additional files may vary as development continues.
+- Conversation history and memory may be stored in a local SQLite database such as `memory.db`.
+- Some tools can create, overwrite, read, or delete files. Review the requested path and action before allowing the agent to proceed.
+- Test file operations on non-important sample files first.
+- Do not run the application with administrator privileges unless that is necessary.
+- AI-generated actions can be inaccurate. Verify important operations yourself.
 
-## Contributing and Feedback
+## Project files
 
-Suggestions, bug reports, and improvements are welcome. When reporting an issue, include the relevant error message and steps to reproduce it, but **never include API tokens, passwords, or other secrets**.
+Files in the repository may include:
+
+- `ui.py` or `main.py` — application interface and entry point, depending on the version.
+- `Function.py` — local tool functions.
+- `data_base.py` — SQLite conversation storage.
+- `system_prompet.txt` — system instructions supplied to the model.
+- `memory.db` — local database file, when included.
+- `requirements.txt` — Python dependencies.
+
+## Troubleshooting
+
+- **Authentication/API errors:** Check your provider account, credentials, model name, endpoint, and any usage limits.
+- **Missing Python modules:** Run `python -m pip install -r requirements.txt` from the project folder.
+- **A feature is unavailable:** Confirm that you are running the files from the intended release and that its configuration is complete.
+- **File-operation errors:** Check that the path exists and that your Windows account has the required permissions.
+
+When asking for help, share the error message and steps to reproduce the problem, but remove API tokens, passwords, personal files, and other sensitive information first.
+
+## Contributing and feedback
+
+Bug reports, suggestions, and improvements are welcome. Please include concise reproduction steps and relevant error messages. Never include secrets or private data.
 
 ## Versioning
 
-This project uses version tags and GitHub Releases to identify stable snapshots of the codebase. The current version is `v0.1`. Future releases should include a version tag, a summary of changes, and relevant setup notes.
+Releases are published on the [GitHub Releases page](https://github.com/sobhsafa31-afk/Kharazmi-agent/releases). Release notes should describe user-visible changes, setup requirements, and known limitations. Use the version's attached files as the source of truth for that release.
 
 ## License
 
-No license is specified in this repository yet. Until a license is added, do not assume that the project is available for unrestricted reuse, redistribution, or modification.
+No license is currently specified. Unless a license is added, do not assume that the project is available for unrestricted reuse, redistribution, or modification.
